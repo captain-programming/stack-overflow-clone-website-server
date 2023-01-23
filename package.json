@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha tests/unit/",
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "nodemon index.js"
   },
   "author": "Dinesh Karde",
   "license": "ISC",

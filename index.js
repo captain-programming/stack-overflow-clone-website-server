@@ -7,17 +7,10 @@ import answerRoutes from "./routes/answer.routes.js";
 import dotenv from 'dotenv';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 dotenv.config();
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
+const dbConnect=()=>{
+  return mongoose.connect(`${process.env.MONGODB_URL}`)
 }
 
 app.use(express.json({limit: "30mb", extended: true}));
@@ -31,11 +24,10 @@ app.get("/", (req, res) => {
 app.use('/users', userRoutes);
 app.use('/questions', questionRoutes);
 app.use('/answer', answerRoutes);
+const PORT = process.env.PORT || 8080;
 
 
-
-connectDB().then(() => {
-  app.listen(PORT, () => {
-      console.log("listening for requests");
-  })
-})
+app.listen(PORT, async()=>{
+  await dbConnect();
+  console.log(`server started on port ${PORT}`);
+});
