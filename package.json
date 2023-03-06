@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "mocha tests/unit/",
     "dev": "nodemon index.js"
   },
@@ -18,6 +18,9 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "razorpay": "^2.8.4",
+    "react-razorpay": "^1.2.0",
+    "stripe": "^11.11.0"
   }
 }

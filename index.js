@@ -4,12 +4,13 @@ import cors from "cors";
 import userRoutes from "./routes/users.routes.js";
 import questionRoutes from "./routes/question.routes.js";
 import answerRoutes from "./routes/answer.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
 import dotenv from 'dotenv';
 
 const app = express();
 dotenv.config();
-app.use(express.json({limit: "30mb", extended: true}));
-app.use(express.urlencoded({limit: "30mb", extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 app.use('/users', userRoutes);
 app.use('/questions', questionRoutes);
 app.use('/answer', answerRoutes);
+app.use('/payment', paymentRoutes);
 
 const PORT = process.env.PORT || 8080;
 

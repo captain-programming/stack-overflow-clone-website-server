@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import userModel from "../models/auth.modeule.js";
 
 export const signup = async(req, res) => {
-  const {name, email, password} = req.body;
+  const {name, email, password, plans} = req.body;
   try{
     const existinguser = await userModel.findOne({email});
     if(existinguser){
@@ -11,7 +11,7 @@ export const signup = async(req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    const newUser = await userModel.create({name: name, email: email, password: hashedPassword});
+    const newUser = await userModel.create({name: name, email: email, password: hashedPassword, plans: plans});
 
     const token = jwt.sign({email: newUser.email, id: newUser._id}, process.env.JWT_SECRET, {expiresIn: '1h'});
     res.status(200).json({result: newUser, token})
